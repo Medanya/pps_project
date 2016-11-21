@@ -9,7 +9,7 @@ enum Event {
 
 class CentralCoordinationUnit {
 private:
-	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel
+	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel1
 	std::set<BoomBarrier *> boomBarrierIn;
 	std::set<BoomBarrier *> boomBarrierOut;
 	static CentralCoordinationUnit instance; // Шаблон Singleton
