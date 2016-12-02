@@ -6,12 +6,13 @@
 #define ELECTRICITYSUPPLYDETECTOR_H_H
 
 #include "Graduation.h"
+#include <string>
 class ElectricitySupplyDetector: Graduation
 {
 	
 public:
 	void generateEvents();
-	void EmergencyEvent( );
+	void EmergencyEvent();
 	bool GetElectricityState( );
 	void Graduate( );
 
