@@ -10,10 +10,11 @@ enum Event {
 class CentralCoordinationUnit {
 private:
 	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel1
-	std::set<BoomBarrier *> boomBarrierIn;
-	std::set<BoomBarrier *> boomBarrierOut;
+	std::set<BoomBarrier *> boomBarrier;
+	std::set<TrafficLight *> trafficLightTrain;
+	std::set<TrafficLight *> trafficLightVehicle;
 	static CentralCoordinationUnit instance; // Шаблон Singleton
-	bool trainComing;
+	int numberOfTrains;
 	bool vehicleOnCrossing;
 
 public:
@@ -22,11 +23,6 @@ public:
 	void connectPublisher(EventPublisher *publisher);
 	void disconnectPublisher(EventPublisher *publisher);
 	CentralCoordinationUnit *getInstance();
-};
-
-class BoomBarrier {
-public:
-	void setBoomBarrierState(bool);
 };
 
 class EventPublisher {

@@ -2,15 +2,13 @@
  * @(#) BoomBarrier.cpp
  */
 
-
 #include "BoomBarrier.h"
-void BoomBarrier::SetBoomBarrierState( )
+void BoomBarrier::SetBoomBarrierState(bool state)
 {
-	
+	isOpen = state;
 }
 
 void BoomBarrier::Graduate( )
 {
 	
 }
-

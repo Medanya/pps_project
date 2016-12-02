@@ -1,11 +1,18 @@
-#include <iostream>
+#include <iostream>generateEvents(Event event)
 
 using namespace std;
 
 int main ()
 {
-    int d;
-    cin >> d;
-    cout << "Hello world!!!\n" << d;
-    return 0;
+	CentralCoordinationUnit CCU = CentralCoordinationUnit();
+	// надо всё создать и дать ссылки друг на друга, возможно, это и есть градуировка????
+	while(true)
+	{
+		switch (event) {
+			case TRAIN_COMING:
+				trainSensor->generateEvents(Event event);
+			case TRAINLEAVING:
+				
+	}
+	return 0;
 }

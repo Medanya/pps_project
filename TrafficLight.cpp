@@ -9,8 +9,13 @@ void TrafficLight::Graduate( )
 	
 }
 
-void TrafficLight::SetSign( )
+void TrafficLight::setTrafficLightState(bool newSign)
 {
-	
+	Sign = newSign;	
+}
+
+bool TrafficLight::getTrafficLightState()
+{
+	return Sign;
 }
 

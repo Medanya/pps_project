@@ -11,10 +11,10 @@ class BoomBarrier: ElectricitySupplyDetector
 	
 public:
 	void Graduate( );
-	void SetBoomBarrierState( );
+	void SetBoomBarrierState(bool state);
 	
 private:
-	boolean isOpen;
+	bool isOpen;
 	
 	
 };
