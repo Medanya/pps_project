@@ -9,7 +9,7 @@ enum Event {
 
 class CentralCoordinationUnit {
 private:
-	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel
+	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel1
 	std::set<BoomBarrier *> boomBarrierIn;
 	std::set<BoomBarrier *> boomBarrierOut;
 	static CentralCoordinationUnit instance; // Шаблон Singleton
@@ -63,55 +63,28 @@ public:
 void CentralCoordinationUnit::handleEvent(Event event) {
 	switch (event) {
 		case TRAIN_COMING:
-			trainComing = true;
-			if (vehicleOnCrossing) {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(true);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(false);
-			}
-			else {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(false);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(false);
+			numberOfTrains++;
+			trafficLightVehicle->setTrafficLightState(red);
+			if (!vehicleOnCrossing) {
+					barrier->setBoomBarrierState(down);
+					sleep(1000);
+				trafficLightTrain->setTrafficLightState(green);
 			}
 			break;
 		case TRAIN_LEAVING:
-			trainComing = false;
-			for (BoomBarrier *barrier : boomBarrierOut)
-				barrier->setBoomBarrierState(true);
-			for (BoomBarrier *barrier : boomBarrierIn)
-				barrier->setBoomBarrierState(true);
-			break;
-		case VEHICLE_ON_CROSSING:
+			numberOfTrains--;
+			if (numberOfTrains == 0) {
+					barrier->setBoomBarrierState(true);
+				break;
+			}
+		case VEHICLE_COMING:
 			vehicleOnCrossing = true;
-			if (trainComing) {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(true);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(false);
-			}
-			else {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(true);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(true);
-			}
 			break;
 		case VEHICLE_LEAVING:
 			vehicleOnCrossing = false;
-			if (trainComing) {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(false);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(false);
-			}
-			else {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(true);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(true);
+			if (numberOfTrains > 0) {
+				barrier->setBoomBarrierState(down);
+				trafficLightTrain->setTrafficLightState(green);
 			}
 			break;
 	}
