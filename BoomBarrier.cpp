@@ -2,7 +2,6 @@
  * @(#) BoomBarrier.cpp
  */
 
-
 #include "BoomBarrier.h"
 void BoomBarrier::SetBoomBarrierState(bool state)
 {
@@ -13,4 +12,3 @@ void BoomBarrier::Graduate( )
 {
 	
 }
-
