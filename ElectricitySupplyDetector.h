@@ -10,9 +10,14 @@ class ElectricitySupplyDetector: Graduation
 {
 	
 public:
+	void generateEvents();
 	void EmergencyEvent( );
 	bool GetElectricityState( );
 	void Graduate( );
+
+protected:
+	string property;
+	CentralCoordinationUnit* centralCoordinationUnit;
 	
 private:
 	Boolean isElectrified;

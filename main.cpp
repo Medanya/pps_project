@@ -11,7 +11,7 @@ int main ()
 		switch (event) {
 			case TRAIN_COMING:
 				trainSensor->generateEvents(Event event);
-			case TRAINLEAVING:
+			case TRAIN_LEAVING:
 				
 	}
 	return 0;

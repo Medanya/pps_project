@@ -10,9 +10,13 @@ class ElectricitySupplyDetector: Graduation
 {
 	
 public:
+	void generateEvents();
 	void EmergencyEvent( );
-	void GetElectricityState( );
+	bool GetElectricityState( );
 	void Graduate( );
+
+protected:
+	string property;
 	
 private:
 	Boolean isElectrified;
