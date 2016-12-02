@@ -4,9 +4,9 @@
 
 
 #include "BoomBarrier.h"
-void BoomBarrier::SetBoomBarrierState(bool state)
+void BoomBarrier::SetBoomBarrierState( )
 {
-	isOpen = state;
+	
 }
 
 void BoomBarrier::Graduate( )

@@ -11,7 +11,7 @@ class ElectricitySupplyDetector: Graduation
 	
 public:
 	void EmergencyEvent( );
-	bool GetElectricityState( );
+	void GetElectricityState( );
 	void Graduate( );
 	
 private:
