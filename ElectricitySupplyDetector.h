@@ -6,13 +6,20 @@
 #define ELECTRICITYSUPPLYDETECTOR_H_H
 
 #include "Graduation.h"
-class ElectricitySupplyDetector: Graduation
+#include "CentralCoordinationUnit.h"
+
+class ElectricitySupplyDetector: public Graduation
 {
 	
 public:
+	void generateEvents();
 	void EmergencyEvent( );
-	void GetElectricityState( );
+	bool GetElectricityState( );
 	void Graduate( );
+
+protected:
+	string property;
+	CentralCoordinationUnit* centralCoordinationUnit;
 	
 private:
 	Boolean isElectrified;

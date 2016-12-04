@@ -1,19 +1,19 @@
 #ifndef VEHICLEDETECTOR_H_H
 #define VEHICLEDETECTOR_H_H
 
-class VehicleDetector {
-    private:
-        bool input = 0;
-        bool output = 0;
-    
-    public:
-        void getOutput(){
-            return self.output;
-        };
-        void getInput(){
-            return self.input;
-        };
-        void Graduate();
+#include "CentralCoordinationUnit.h"
+
+class VehicleDetector: public ElectricitySupplyDetector {
+
+private:
+        bool currentLane;
+	vector<bool> isVehicle;
+	
+public:
+	bool getCurrentLane();
+	void setCurrentLane(bool newLane);
+	bool getState(int index);
+	void setState(bool state, int index);
 }
 
 #endif
