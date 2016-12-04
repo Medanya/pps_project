@@ -3,16 +3,14 @@
 CentralCoordinationUnit CentralCoordinationUnit::instance;
 
 void CentralCoordinationUnit::handleEvent(Event event) {
-	/*switch (event) {
+	switch (event) {
 		case TRAIN_COMING: {
 			trainComing = true;
-			unsigned i = 0;
-			for (; i < kNumberOfRailways; ++i)
-				if (vehicleOnCrossing[i])
-					break;
-			if (i < kNumberOfRailways) {
-				
-			}
+			boomBarrier[0].setBoomBarrierState(vehicleOnCrossing[0]);
+			boomBarrier[1].setBoomBarrierState(vehicleOnCrossing[1]);
+			if (vehicleOnCrossing[0] || vehicleOnCrossing[1])
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].
 			break;
 		}
 		case TRAIN_LEAVING:
@@ -52,7 +50,7 @@ void CentralCoordinationUnit::handleEvent(Event event) {
 					barrier->setBoomBarrierState(true);
 			}
 			break;
-	}*/
+	}
 }
 
 void CentralCoordinationUnit::eventLoop() {

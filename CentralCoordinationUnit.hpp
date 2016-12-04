@@ -21,10 +21,10 @@ private:
 	bool vehicleOnCrossing[kNumberOfLines];
 	
 public:
-	BoomBarrier *boomBarrier[kNumberOfLines];
-	TrafficLight *trainTrafficLights[kNumberOfRailways];
-	TrafficLight *carTrafficLights[kNumberOfLines];
-	TrafficLight *pedestrianTrafficLights[kNumberOfLines];
+	BoomBarrier boomBarrier[kNumberOfLines];
+	TrafficLight trainTrafficLights[kNumberOfRailways];
+	TrafficLight carTrafficLights[kNumberOfLines];
+	TrafficLight pedestrianTrafficLights[kNumberOfLines];
 	
 	void handleEvent(Event event);
 	void eventLoop();
