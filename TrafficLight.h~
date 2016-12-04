@@ -11,12 +11,10 @@ class TrafficLight: ElectricitySupplyDetector
 	
 public:
 	void Graduate( );
-	void setTrafficLightState(bool newSign);
-	bool getTrafficLightState();
-	void showTrafficLight();
+	void SetSign( );
 	
 private:
-	bool Sign;
+	Boolean Sign;
 	
 	
 };

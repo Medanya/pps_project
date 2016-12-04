@@ -1,0 +1,13 @@
+#ifndef TRAINSENSOR_H_H
+#define TRAINSENSOR_H_H
+
+class TrainSensor : public EventPublisher {
+private:
+	CentralCoordinationUnit* centralCoordinationUnit;
+
+public:
+	TrainSensor();
+	void generateEvents();
+};
+
+#endif

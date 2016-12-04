@@ -14,8 +14,8 @@ void ElectricitySupplyDetector::Graduate( )
 	
 }
 
-bool ElectricitySupplyDetector::GetElectricityState( )
+void ElectricitySupplyDetector::GetElectricityState( )
 {
-	return isElectrified;
+	
 }
 
