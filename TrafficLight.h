@@ -13,6 +13,7 @@ public:
 	void Graduate( );
 	void setTrafficLightState(bool newSign);
 	bool getTrafficLightState();
+	void showTrafficLight();
 	
 private:
 	bool Sign;
