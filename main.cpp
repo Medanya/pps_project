@@ -4,7 +4,7 @@
 #include "VehicleDetector.hpp"
 
 int main() {
-	CentralCoordinationUnit CCU = CentralCoordinationUnit();
+	CentralCoordinationUnit &CCU = *CentralCoordinationUnit::getInstance();
 	TrainSensor trainSensors[CentralCoordinationUnit::kNumberOfRailways];
 	VehicleDetector *vehicleDetectors[CentralCoordinationUnit::kNumberOfLines];
 	
