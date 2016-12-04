@@ -16,3 +16,11 @@ void TrainSensor::generateEvents() {
 		CentralCoordinationUnit::getInstance()->handleEvent(TRAIN_LEAVING);
 	trainLeavingState = newState;
 }
+
+bool TrainSensor::isTrainComing() {
+	return false;
+}
+
+bool TrainSensor::isTrainLeaving() {
+	return false;
+}
