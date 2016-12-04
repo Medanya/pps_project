@@ -9,21 +9,26 @@
 
 class CentralCoordinationUnit {
 private:
-	static const unsigned kNumberOfRailways = 4;
-	
 	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel
-	BoomBarrier *boomBarrier[2];
-	TrafficLight *trainTrafficLights[kNumberOfRailways];
-	TrafficLight *carTrafficLights[kNumberOfRailways];
-	TrafficLight *pedestrianTrafficLights[kNumberOfRailways];
 	static CentralCoordinationUnit instance; // Шаблон Singleton
-	bool trainComing;
-	bool vehicleOnCrossing[2];
 
 public:
+	static const unsigned kNumberOfRailways = 4;
+	static const unsigned kNumberOfLines = 2;
+	
+private:
+	bool trainComing;
+	bool vehicleOnCrossing[kNumberOfLines];
+	
+public:
+	BoomBarrier *boomBarrier[kNumberOfLines];
+	TrafficLight *trainTrafficLights[kNumberOfRailways];
+	TrafficLight *carTrafficLights[kNumberOfLines];
+	TrafficLight *pedestrianTrafficLights[kNumberOfLines];
+	
 	void handleEvent(Event event);
 	void eventLoop();
 	void connectPublisher(EventPublisher *publisher);
 	void disconnectPublisher(EventPublisher *publisher);
-	CentralCoordinationUnit *getInstance();
+	static CentralCoordinationUnit *getInstance();
 };
