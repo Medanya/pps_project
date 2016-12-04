@@ -1,19 +1,17 @@
 #include "CentralCoordinationUnit.hpp"
 
-CentralCoordinationUnit CentralCoordinationUnit::instance;
-
 void CentralCoordinationUnit::handleEvent(Event event) {
 	switch (event) {
 		case TRAIN_COMING: {
-			trainComing = true;
+			++trainComing;
 			boomBarrier[0].setBoomBarrierState(vehicleOnCrossing[0]);
 			boomBarrier[1].setBoomBarrierState(vehicleOnCrossing[1]);
 			if (vehicleOnCrossing[0] || vehicleOnCrossing[1])
 				for (unsigned i = 0; i < kNumberOfRailways; ++i)
-					trainTrafficLights[i].
+					trainTrafficLights[i].setColor(TL_COLOR_RED);
 			break;
 		}
-		case TRAIN_LEAVING:
+		/*case TRAIN_LEAVING:
 			trainComing = false;
 			for (BoomBarrier *barrier : boomBarrierOut)
 				barrier->setBoomBarrierState(true);
@@ -49,7 +47,7 @@ void CentralCoordinationUnit::handleEvent(Event event) {
 				for (BoomBarrier *barrier : boomBarrierIn)
 					barrier->setBoomBarrierState(true);
 			}
-			break;
+			break;*/
 	}
 }
 
@@ -69,5 +67,6 @@ void CentralCoordinationUnit::disconnectPublisher(EventPublisher *publisher) {
 }
 
 CentralCoordinationUnit *CentralCoordinationUnit::getInstance() {
+	static CentralCoordinationUnit instance; // Шаблон Singleton
 	return &instance;
 }

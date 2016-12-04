@@ -1,8 +1,14 @@
 #pragma once
 
+enum TrafficLightColor {
+	TL_COLOR_RED = 0,
+	TL_COLOR_GREEN
+};
+
 class TrafficLight {
 private:
-	bool color;
+	TrafficLightColor color;
+
 public:
-	void setColor();
+	void setColor(TrafficLightColor color);
 };

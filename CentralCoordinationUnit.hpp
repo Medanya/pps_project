@@ -10,15 +10,16 @@
 class CentralCoordinationUnit {
 private:
 	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel
-	static CentralCoordinationUnit instance; // Шаблон Singleton
 
 public:
 	static const unsigned kNumberOfRailways = 4;
 	static const unsigned kNumberOfLines = 2;
 	
 private:
-	bool trainComing;
+	int trainComing;
 	bool vehicleOnCrossing[kNumberOfLines];
+
+	CentralCoordinationUnit() : trainComing(0) {};
 	
 public:
 	BoomBarrier boomBarrier[kNumberOfLines];
