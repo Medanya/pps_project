@@ -17,4 +17,5 @@ public:
 	void setTrainTrafficLightColor(int n, TrafficLightColor color);
 	void setCarTrafficLightColor(int n, TrafficLightColor color);
 	void setBoomBarrierState(int n, bool state);
+	void graduate(SelfDefectFinder *device);
 };

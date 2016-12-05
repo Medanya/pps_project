@@ -45,3 +45,7 @@ void RemoteControl::takeManualControl() {
 void RemoteControl::returnToAutomaticControl() {
 	CCU->setManualControl(false);
 }
+
+void RemoteControl::graduate(SelfDefectFinder *device) {
+	device->graduate();
+}
