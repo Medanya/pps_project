@@ -1,8 +1,9 @@
 #pragma once
 
 #include "EventPublisher.hpp"
+#include "SelfDefectFinder.hpp"
 
-class TrainSensor : public EventPublisher {
+class TrainSensor : public EventPublisher, public SelfDefectFinder {
 private:
 	bool trainComingState;
 	bool trainLeavingState;
