@@ -20,7 +20,7 @@ private:
 	bool vehicleOnCrossing[kNumberOfLines];
 
 	CentralCoordinationUnit() : trainComing(0) {};
-	
+
 public:
 	BoomBarrier boomBarrier[kNumberOfLines];
 	TrafficLight trainTrafficLights[kNumberOfRailways];

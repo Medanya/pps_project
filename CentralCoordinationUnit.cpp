@@ -4,50 +4,116 @@ void CentralCoordinationUnit::handleEvent(Event event) {
 	switch (event) {
 		case TRAIN_COMING: {
 			++trainComing;
-			boomBarrier[0].setBoomBarrierState(vehicleOnCrossing[0]);
-			boomBarrier[1].setBoomBarrierState(vehicleOnCrossing[1]);
-			if (vehicleOnCrossing[0] || vehicleOnCrossing[1])
+			if (trainComing == 1) {
+				boomBarrier[0].setBoomBarrierState(vehicleOnCrossing[0]);
+				boomBarrier[1].setBoomBarrierState(vehicleOnCrossing[1]);
 				for (unsigned i = 0; i < kNumberOfRailways; ++i)
-					trainTrafficLights[i].setColor(TL_COLOR_RED);
+					trainTrafficLights[i].setColor((vehicleOnCrossing[0] || vehicleOnCrossing[1]) ? TL_COLOR_RED : TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_RED);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_RED);
+				}
+			}
 			break;
 		}
-		/*case TRAIN_LEAVING:
-			trainComing = false;
-			for (BoomBarrier *barrier : boomBarrierOut)
-				barrier->setBoomBarrierState(true);
-			for (BoomBarrier *barrier : boomBarrierIn)
-				barrier->setBoomBarrierState(true);
-			break;
-		case VEHICLE_ON_CROSSING:
-			vehicleOnCrossing = true;
-			if (trainComing) {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(true);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(false);
-			}
-			else {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(true);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(true);
+		case TRAIN_LEAVING: {
+			--trainComing;
+			if (trainComing == 0) {
+				boomBarrier[0].setBoomBarrierState(true);
+				boomBarrier[1].setBoomBarrierState(true);
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_GREEN);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_GREEN);
+				}
 			}
 			break;
-		case VEHICLE_LEAVING:
-			vehicleOnCrossing = false;
-			if (trainComing) {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(false);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(false);
+		}
+		case VEHICLE_ON_CROSSING_1:
+			vehicleOnCrossing[0] = true;
+			if (trainComing > 0) {
+				boomBarrier[0].setBoomBarrierState(true);
+				boomBarrier[1].setBoomBarrierState(vehicleOnCrossing[1]);
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(TL_COLOR_RED);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_RED);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_RED);
+				}
 			}
 			else {
-				for (BoomBarrier *barrier : boomBarrierOut)
-					barrier->setBoomBarrierState(true);
-				for (BoomBarrier *barrier : boomBarrierIn)
-					barrier->setBoomBarrierState(true);
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_GREEN);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_GREEN);
+				}
 			}
-			break;*/
+			break;
+		case VEHICLE_LEAVING_1:
+			vehicleOnCrossing[0] = false;
+			if (trainComing > 0) {
+				boomBarrier[0].setBoomBarrierState(false);
+				boomBarrier[1].setBoomBarrierState(vehicleOnCrossing[1]);
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(vehicleOnCrossing[1] ? TL_COLOR_RED : TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_RED);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_RED);
+				}
+			}
+			else {
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_GREEN);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_GREEN);
+				}
+			}
+			break;
+		case VEHICLE_ON_CROSSING_2:
+			vehicleOnCrossing[1] = true;
+			if (trainComing > 0) {
+				boomBarrier[0].setBoomBarrierState(vehicleOnCrossing[0]);
+				boomBarrier[1].setBoomBarrierState(true);
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(TL_COLOR_RED);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_RED);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_RED);
+				}
+			}
+			else {
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_GREEN);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_GREEN);
+				}
+			}
+			break;
+		case VEHICLE_LEAVING_2:
+			vehicleOnCrossing[1] = false;
+			if (trainComing > 0) {
+				boomBarrier[0].setBoomBarrierState(vehicleOnCrossing[0]);
+				boomBarrier[1].setBoomBarrierState(false);
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(vehicleOnCrossing[0] ? TL_COLOR_RED : TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_RED);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_RED);
+				}
+			}
+			else {
+				for (unsigned i = 0; i < kNumberOfRailways; ++i)
+					trainTrafficLights[i].setColor(TL_COLOR_GREEN);
+				for (unsigned i = 0; i < kNumberOfLines; ++i) {
+					carTrafficLights[i].setColor(TL_COLOR_GREEN);
+					pedestrianTrafficLights[i].setColor(TL_COLOR_GREEN);
+				}
+			}
+			break;
 	}
 }
 
