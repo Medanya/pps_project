@@ -17,9 +17,10 @@ public:
 	
 private:
 	int trainComing;
+	bool manualControl;
 	bool vehicleOnCrossing[kNumberOfLines];
 
-	CentralCoordinationUnit() : trainComing(0) {};
+	CentralCoordinationUnit() : trainComing(0), manualControl(false) {};
 
 public:
 	BoomBarrier boomBarrier[kNumberOfLines];
@@ -27,6 +28,8 @@ public:
 	TrafficLight carTrafficLights[kNumberOfLines];
 	TrafficLight pedestrianTrafficLights[kNumberOfLines];
 	
+	bool getManualControl() const;
+	void setManualControl(bool flag);
 	void handleEvent(Event event);
 	void eventLoop();
 	void connectPublisher(EventPublisher *publisher);

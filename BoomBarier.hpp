@@ -1,6 +1,8 @@
 #pragma once
 
-class BoomBarrier {
+#include "SelfDefectFinder.hpp"
+
+class BoomBarrier : public SelfDefectFinder {
 private:
 	bool state;
 

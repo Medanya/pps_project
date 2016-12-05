@@ -1,6 +1,8 @@
 #include "CentralCoordinationUnit.hpp"
 
 void CentralCoordinationUnit::handleEvent(Event event) {
+	if (manualControl)
+		return;
 	switch (event) {
 		case TRAIN_COMING: {
 			++trainComing;
@@ -135,4 +137,12 @@ void CentralCoordinationUnit::disconnectPublisher(EventPublisher *publisher) {
 CentralCoordinationUnit *CentralCoordinationUnit::getInstance() {
 	static CentralCoordinationUnit instance; // Шаблон Singleton
 	return &instance;
+}
+
+bool CentralCoordinationUnit::getManualControl() const {
+	return manualControl;
+}
+
+void CentralCoordinationUnit::setManualControl(bool flag) {
+	manualControl = flag;
 }
