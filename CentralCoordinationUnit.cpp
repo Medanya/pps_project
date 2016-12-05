@@ -1,4 +1,5 @@
 #include "CentralCoordinationUnit.hpp"
+#include "sdl.hpp"
 
 void CentralCoordinationUnit::handleEvent(Event event) {
 	if (manualControl)
@@ -120,9 +121,12 @@ void CentralCoordinationUnit::handleEvent(Event event) {
 }
 
 void CentralCoordinationUnit::eventLoop() {
+	SDL::init();
 	while (true) {
 		for (EventPublisher *publisher : connectedPublishers)
 			publisher->generateEvents();
+		if (SDL::loop_step())
+			break;
 	}
 }
 
