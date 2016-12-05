@@ -8,9 +8,6 @@
 #include "TrafficLight.hpp"
 
 class CentralCoordinationUnit {
-private:
-	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel
-
 public:
 	static const unsigned kNumberOfRailways = 4;
 	static const unsigned kNumberOfLines = 2;
@@ -23,11 +20,12 @@ private:
 	CentralCoordinationUnit() : trainComing(0), manualControl(false) {};
 
 public:
+	std::set<EventPublisher *> connectedPublishers; // Шаблон Event Channel
 	BoomBarrier boomBarrier[kNumberOfLines];
 	TrafficLight trainTrafficLights[kNumberOfRailways];
 	TrafficLight carTrafficLights[kNumberOfLines];
 	TrafficLight pedestrianTrafficLights[kNumberOfLines];
-	
+
 	bool getManualControl() const;
 	void setManualControl(bool flag);
 	void handleEvent(Event event);
