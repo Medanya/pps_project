@@ -1,4 +1,5 @@
 #include "RemoteControl.hpp"
+#include "EventPublisher.hpp"
 
 void RemoteControl::setBoomBarrierState(int n, bool state) {
 	CCU->boomBarrier[n].setBoomBarrierState(state);
@@ -26,6 +27,13 @@ std::vector<SelfDefectFinder *> RemoteControl::getDefectiveComponents() {
 			defective.push_back(&CCU->carTrafficLights[i]);
 		if (CCU->pedestrianTrafficLights[i].hasDefect())
 			defective.push_back(&CCU->pedestrianTrafficLights[i]);
+	}
+	for (EventPublisher *publisher : CCU->connectedPublishers) {
+		SelfDefectFinder *def = reinterpret_cast<SelfDefectFinder *>(publisher);
+		if (def->hasDefect()) {
+			publisher->disable();
+			defective.push_back(def);
+		}
 	}
 	return defective;
 }
